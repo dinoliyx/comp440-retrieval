@@ -34,11 +34,13 @@ For Sing, I think it does a good job listing the words singing, theater, and hos
 
 ### Your questions, as you typed them
 
-XXXX
+1. The movie that's like  a group of car fighting against another a group of cars, they are all aliens.
+2. They are huge robots that can convert to cars and vice vera
+3. A lot of specail effects and visual appealling
 
 ### Did the movies you meant come up? What did TF-IDF get right and wrong?
 
-XXXX
+NO it doesn't appear
 
 ## Part 4: The question bank
 
