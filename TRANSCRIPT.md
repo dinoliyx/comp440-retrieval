@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb | 2026-10-20T18:53:12.602Z -->
 ## Session `9c09130d`, 2026-10-20 18:53:12
 
-*6 user turns. Tool outputs and reasoning omitted.*
+*7 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -118,5 +118,46 @@ Now the second one. Again, a guess with one reason is enough, in a sentence or t
 
 **User:**
 Embedding search because it compares the question with overviews and ranks them. I think in this way it understand the context better than TF-IDF
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 0 predictions and push to GitHub
+- 🔧 `Read`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/tfidf_settings.py
+- 🔧 `Bash`: Check the template for new commits
+I typed your second prediction in word for word. The slot now reads:
+
+> ### Vague descriptions: which method will do better, and why?
+>
+> Embedding search because it compares the question with overviews and ranks them. I think in this way it understand the context better than TF-IDF
+
+```
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 14c987f] Part 0 done
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/dinoliyx/comp440-retrieval.git
+   8ddbec7..14c987f  main -> main
+```
+
+Setup is done, and your predictions are saved on GitHub. I also checked the template, and it has no new changes.
+
+**Part 1: Build the TF-IDF model** (about 6 minutes). Most people finish Part 3 or 4 in class. The rest is due 8:00am Thursday, October 22.
+
+`tfidf_settings.py` has three settings. Words are always lowercased, so "Dog" and "dog" count as one word.
+
+**1. `REMOVE_STOP_WORDS`**: `True` or `False`, now `False`. When it's `True`, about 300 common words are dropped before scoring. For example, "the dog ate the bone" becomes "dog ate bone". The list comes from scikit-learn, and it covers more than "the" and "of". It also drops words like "bill", "fire", "name" and "system". It drops the number words "one" to "twelve" too, except "seven".
+
+**2. `MIN_MOVIES`**: a whole number, 1 or more, now `1`. A word is kept only if it shows up in at least this many plot summaries. If it's set to 3, a word that appears in just two summaries is thrown out. 1 is the only value that keeps a word found in a single summary.
+
+**3. `REPEATS_COUNT_LESS`**: `True` or `False`, now `False`. When it's `True`, a word repeated in one summary counts as 1 + log(count) instead of its full count. If "shark" appears 4 times, it counts as about 2.4 instead of 4.
+
+Please give me your three choices in one reply, each with a reason. Keeping the current value is a choice too, and it needs a reason like the others.
+
+**User:**
+True, because common words can dillute the information density from the questions. 3 because I think the strongest words that representes the movies accuratly. True, because it still captures the words weight but it won't makes too much of difference between words.
+
+**Claude:**
+- 🔧 `Bash`: Set the three TF-IDF settings to the chosen values
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
 
 <!-- end-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb -->
