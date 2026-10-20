@@ -20,7 +20,9 @@ Embedding search because it compares the question with overviews and ranks them.
 
 ### The settings you chose, and why
 
-XXXX
+- `REMOVE_STOP_WORDS = True`: because common words can dillute the information density from the questions.
+- `MIN_MOVIES = 3`: because I think the strongest words that representes the movies accuratly.
+- `REPEATS_COUNT_LESS = True`: because it still captures the words weight but it won't makes too much of difference between words.
 
 ## Part 2: Top terms
 
