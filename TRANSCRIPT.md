@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb | 2026-10-20T18:53:12.602Z -->
 ## Session `9c09130d`, 2026-10-20 18:53:12
 
-*13 user turns. Tool outputs and reasoning omitted.*
+*23 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -344,5 +344,189 @@ Should I use this version, or keep it as you wrote it?
 
 **User:**
 yes use that version
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 2, push, and check the template
+Done. The slot now reads:
+
+> For Sing, I think it does a good job listing the words singing, theater, and hosting but I'm surprised that animal is not on the top of the list because I think that would makes it distinctive. For Kill Bill: Vol. 1, it gets right with the general plot of the movie but I expected to see Bill there too, and that's what would've made it distinctive.
+
+```
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 8accd0b] Part 2 done
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To https://github.com/dinoliyx/comp440-retrieval.git
+   f6073c0..8accd0b  main -> main
+```
+
+Part 2 is saved on GitHub, and the template has no new changes.
+
+**Part 3: Your own searches** (about 7 minutes). You'll run three searches. I'll run each one exactly as you type it.
+
+What's your first question? For example, describe a movie you know in your own words, without using its title.
+
+**User:**
+fro any movie?
+
+**Claude:**
+Yes, any movie you like. It can be one of your Part 2 movies, or any other movie you know.
+
+The collection has 4,309 movies, including the ones you rated in HW1. If your movie isn't in it, that's fine too: the search still shows you what comes up.
+
+What's your first question?
+
+**User:**
+The movie that's like  a group of car fighting against another a group of cars, they are all aliens.
+
+**Claude:**
+- 🔧 `Bash`: Run the first search question with TF-IDF
+```
+Question: The movie that's like a group of car fighting against another a group of cars, they are all aliens.
+
+TF-IDF, top 10:
+   1. 0.211  The Seeker: The Dark Is Rising (2007)   matched: fighting, group
+   2. 0.193  Scary Movie 2 (2001)   matched: group, movie, like
+   3. 0.174  Ford v. Ferrari (2019)   matched: cars, car
+   4. 0.165  Matrix, The (1999)   matched: fighting, group
+   5. 0.162  Gone in 60 Seconds (2000)   matched: cars, car
+   6. 0.154  Sgt. Bilko (1996)   matched: fighting, group
+   7. 0.149  Near Dark (1987)   matched: cars
+   8. 0.146  Timeline (2003)   matched: group
+   9. 0.142  Tao of Steve, The (2000)   matched: like
+  10. 0.141  Days of Thunder (1990)   matched: cars, car
+      Ignored as stop words: the, that, of, against, another, they, are, all.
+```
+
+In each line, the number is the movie's TF-IDF score. "matched" lists the words from your question that appear in that movie's plot summary.
+
+What's your second question?
+
+**User:**
+what does it mean
+
+**Claude:**
+I can tell you how to read it. What it says about your movie is for you to work out.
+
+- **Each line** is a movie, ranked by how well its plot summary matches your question. Line 1 is the best match.
+- **The number** (like 0.211) is the score. It's higher when the summary shares more of your question's words, and when those words are rarer in the collection.
+- **matched** lists the words that were in both your question and that summary. Only those words added to the score.
+- **Ignored as stop words** lists the words your Part 1 setting dropped before scoring.
+
+So TF-IDF only sees words. It ranks summaries by which of your words they contain.
+
+When you look at this list, what do you notice about the movie you had in mind?
+
+**User:**
+My movie is not here
+
+**Claude:**
+Got it. Keep that in mind, because you'll write about each search after all three are done.
+
+What's your second question?
+
+**User:**
+Who won at the end of the movie?
+
+**Claude:**
+Do you want me to run that as your second search, word for word? Or are you asking me about the movie you had in mind?
+
+**User:**
+I'm confused by what kind of question you want me to ask
+
+**Claude:**
+That's fine. Each search is a description of a movie you know, written without its title. The search tries to find that movie. Your first one was a search like that.
+
+The README suggests trying three kinds:
+- **a detail**: something specific, like a character, a place, or a thing in the movie
+- **the plot retold**: what happens, in your own words
+- **something vague**: the way you'd describe it to a friend who's trying to guess
+
+It can be the same movie as your first search or a different one.
+
+What's your second search?
+
+**User:**
+They are huge robots that can convert to cars and vice vera
+
+**Claude:**
+- 🔧 `Bash`: Run the second search question with TF-IDF
+```
+Question: They are huge robots that can convert to cars and vice vera
+
+TF-IDF, top 10:
+   1. 0.315  Annihilator (1986)   matched: robots
+   2. 0.166  Near Dark (1987)   matched: cars
+   3. 0.149  Sky Captain and the World of Tomorrow (2004)   matched: robots
+   4. 0.146  Contender, The (2000)   matched: vice
+   5. 0.143  Bonnie and Clyde (1967)   matched: cars
+   6. 0.141  I, Robot (2004)   matched: robots
+   7. 0.139  Surrogates (2009)   matched: robots
+   8. 0.134  Freaky Friday (1977)   matched: vice
+   9. 0.133  We're the Millers (2013)   matched: huge
+  10. 0.125  Real Steel (2011)   matched: robots
+      Ignored as stop words: they, are, that, can, to, and.
+      Not in the vocabulary (in fewer than 3 summaries, or none): convert, vera.
+```
+
+The last line is new this time. It lists words from your question that TF-IDF left out because of your `MIN_MOVIES = 3` setting. Each of those words is in fewer than 3 plot summaries, or in none.
+
+What's your third search?
+
+**User:**
+A lot of specail effects and visual appealling
+
+**Claude:**
+- 🔧 `Bash`: Run the third search question with TF-IDF
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+```
+Question: A lot of specail effects and visual appealling
+
+TF-IDF, top 10:
+   1. 0.310  F/X (1986)   matched: effects
+   2. 0.282  Kids in the Hall: Brain Candy (1996)   matched: effects
+   3. 0.238  Full Metal Jacket (1987)   matched: effects
+   4. 0.200  Charlie Wilson's War (2007)   matched: effects
+   5. 0.175  Toxic Avenger, The (1985)   matched: lot
+   6. 0.173  Invention of Lying, The (2009)   matched: lot
+   7. 0.169  Smokin' Aces (2006)   matched: lot
+   8. 0.169  Insidious (2010)   matched: lot
+   9. 0.168  Animal, The (2001)   matched: effects
+  10. 0.161  Pagemaster, The (1994)   matched: lot
+      Ignored as stop words: of, and.
+      Not in the vocabulary (in fewer than 3 summaries, or none): specail, visual, appealling.
+```
+
+That's three searches. I wrote them into the slot exactly as you typed them:
+
+> ### Your questions, as you typed them
+>
+> 1. The movie that's like  a group of car fighting against another a group of cars, they are all aliens.
+> 2. They are huge robots that can convert to cars and vice vera
+> 3. A lot of specail effects and visual appealling
+
+Did the movies you meant come up? What did TF-IDF get right, and what did it get wrong? A sentence or two is enough.
+
+**User:**
+NO it doesn't appear
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I typed your answer in word for word. The slot now reads:
+
+> ### Did the movies you meant come up? What did TF-IDF get right and wrong?
+>
+> NO it doesn't appear
+
+That answers the first half of the question. The second half asks what TF-IDF got right and wrong. It may help to look at the "matched" words and the "Ignored" and "Not in the vocabulary" lines in your three searches.
+
+What did TF-IDF get right, and what did it get wrong? A sentence or two is enough.
+
+**User:**
+save everything I will come back
+
+**Claude:**
+- 🔧 `Skill`: save
 
 <!-- end-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb -->
