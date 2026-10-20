@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb | 2026-10-20T18:53:12.602Z -->
 ## Session `9c09130d`, 2026-10-20 18:53:12
 
-*2 user turns. Tool outputs and reasoning omitted.*
+*6 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -47,5 +47,76 @@ What's your name, as you'd like it on your writeup?
 
 **User:**
 Dino
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Refresh transcript and commit name and date
+Your name and the date are in, and committed:
+
+```
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 2e471af] Name and date
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+```
+
+**Part 0: Predictions** (about 10 minutes)
+
+Keyword search (TF-IDF) scores a movie by the words its plot summary shares with your question. Embedding search turns your question and each plot summary into a list of numbers, and ranks the movies whose numbers are closest to your question's.
+
+First prediction. A guess is fine, and a sentence or two is enough:
+
+**Questions that name a character, place or thing: which method will do better, and why?**
+
+**User:**
+<task-notification>
+<task-id>beifwu4w7</task-id>
+<tool-use-id>toolu_01UEVpy6ChYHjRiAAULLrMjq</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-dinoli-Desktop-COMP440-Class-activities-comp440-retrieval/9c09130d-9be8-4c5d-9e9f-69f325dac0eb/tasks/beifwu4w7.output</output-file>
+<status>completed</status>
+<summary>Background command "Install packages and download the embedding model" completed (exit code 0)</summary>
+</task-notification>
+
+**Claude:**
+- 🔧 `Read`: /private/tmp/claude-501/-Users-dinoli-Desktop-COMP440-Class-activities-comp440-retrieval/9c09130d...
+The background setup job finished. Its last line:
+
+```
+The embedding model is ready: it matches the shipped vectors for 5 test movies.
+```
+
+That means the packages are installed and the embedding model is downloaded and checked.
+
+**User:**
+ok what should I do
+
+**Claude:**
+Next is your first prediction. It's a guess about which method will do better, written before anything gets searched.
+
+The two methods again:
+- **Keyword search (TF-IDF)** scores a movie by the words its plot summary shares with your question.
+- **Embedding search** turns your question and each plot summary into a list of numbers. It ranks the movies whose numbers are closest to your question's.
+
+Tell me which method you think will win on this kind of question, and give one reason. A sentence or two is enough, and I'll type it in exactly as you say it.
+
+**Questions that name a character, place or thing: which method will do better, and why?**
+
+**User:**
+TF-IDF should do better for these questions because normally the names of character or place are unique so I would think keyword search can easily spot the words since it weigh this kind of uniqueness for words.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I typed your first prediction in word for word. The slot now reads:
+
+> ### Questions that name a character, place or thing: which method will do better, and why?
+>
+> TF-IDF should do better for these questions because normally the names of character or place are unique so I would think keyword search can easily spot the words since it weigh this kind of uniqueness for words.
+
+Now the second one. Again, a guess with one reason is enough, in a sentence or two:
+
+**Vague descriptions: which method will do better, and why?**
+
+**User:**
+Embedding search because it compares the question with overviews and ranks them. I think in this way it understand the context better than TF-IDF
 
 <!-- end-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb -->
