@@ -28,7 +28,7 @@ Embedding search because it compares the question with overviews and ranks them.
 
 ### Your movies: what do the top terms get right and wrong about what makes each one distinctive?
 
-XXXX
+For Sing, I think it does a good job listing the words singing, theater, and hosting but I'm surprised that animal is not on the top of the list because I think that would makes it distinctive. For Kill Bill: Vol. 1, it gets right with the general plot of the movie but I expected to see Bill there too, and that's what would've made it distinctive.
 
 ## Part 3: Your own searches
 
