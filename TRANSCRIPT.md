@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb | 2026-10-20T18:53:12.602Z -->
 ## Session `9c09130d`, 2026-10-20 18:53:12
 
-*7 user turns. Tool outputs and reasoning omitted.*
+*13 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -159,5 +159,190 @@ True, because common words can dillute the information density from the question
 **Claude:**
 - 🔧 `Bash`: Set the three TF-IDF settings to the chosen values
 - 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 1, push, and check the template
+I set the file to your choices:
+
+```
+REMOVE_STOP_WORDS = True
+MIN_MOVIES = 3
+REPEATS_COUNT_LESS = True
+```
+
+The slot now reads:
+
+> ### The settings you chose, and why
+>
+> - `REMOVE_STOP_WORDS = True`: because common words can dillute the information density from the questions.
+> - `MIN_MOVIES = 3`: because I think the strongest words that representes the movies accuratly.
+> - `REPEATS_COUNT_LESS = True`: because it still captures the words weight but it won't makes too much of difference between words.
+
+```
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main f6073c0] Part 1 done
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+To https://github.com/dinoliyx/comp440-retrieval.git
+   14c987f..f6073c0  main -> main
+```
+
+Part 1 is saved on GitHub, and the template has no new changes. The `MIN_MOVIES` reason looks like it may be missing a few words. You can finish that sentence any time.
+
+**Part 2: Top terms** (about 6 minutes). The packages are already installed.
+
+Which two movies do you know well? The movies you rated in HW1 are in the collection.
+
+**User:**
+Sing, jaw
+
+**Claude:**
+- 🔧 `Bash`: Show top TF-IDF terms for the two movies
+Here's what each one printed:
+
+```
+Sing (2016): the 10 words with the highest TF-IDF weight in its plot summary.
+Only 10 of this summary's words are in the vocabulary with your settings.
+
+     word               weight  count here  movies
+  1. hosting             0.417           1       5
+  2. singing             0.417           1       5
+  3. theater             0.363           1      15
+  4. competition         0.345           1      21
+  5. recruits            0.336           1      25
+  6. business            0.278           1      74
+  7. best                0.251           1     121
+  8. named               0.234           1     166
+  9. friend              0.229           1     182
+ 10. help                0.206           1     278
+
+count here: how many times the word is in this plot summary. movies: how many of the 4,309 plot summaries have it.
+
+The plot summary: A koala named Buster recruits his best friend to help him drum up business for his theater by hosting a singing competition.
+
+Your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+```
+
+```
+5 movies match "jaw". Run it again with the whole title of one:
+  Jaws (1975)
+  Jaws 2 (1978)
+  Jaws 3-D (1983)
+  Jaws: The Revenge (1987)
+  Jawbreaker (1999)
+```
+
+"Sing" found its movie. "jaw" matched five titles.
+
+Which of these five did you mean?
+
+**User:**
+no jaw, let's do legally blonde
+
+**Claude:**
+- 🔧 `Bash`: Show top TF-IDF terms for Legally Blonde
+Here's the output for Legally Blonde:
+
+```
+Legally Blonde (2001): the 13 words with the highest TF-IDF weight in its plot summary.
+Only 13 of this summary's words are in the vocabulary with your settings.
+
+     word               weight  count here  movies
+  1. elle                0.368           1       3
+  2. sorority            0.358           1       4
+  3. figures             0.310           1      13
+  4. dumped              0.304           1      15
+  5. looks               0.284           1      24
+  6. woods               0.280           1      26
+  7. queen               0.270           1      33
+  8. follow              0.268           1      34
+  9. boyfriend           0.254           1      47
+ 10. law                 0.245           1      57
+ 11. decides             0.215           1     110
+ 12. just                0.198           1     159
+ 13. school              0.184           1     217
+
+count here: how many times the word is in this plot summary. movies: how many of the 4,309 plot summaries have it.
+
+The plot summary: Elle Woods, a fashionable sorority queen, is dumped by her boyfriend. She decides to follow him to law school, but while there, she figures out that there is more to herself than just looks.
+
+Your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+```
+
+That's your two movies: Sing and Legally Blonde. Both outputs are in this message so you can compare them.
+
+For each movie, what do the top terms get right, and what do they get wrong, about what makes it distinctive? A sentence or two per movie is enough.
+
+**User:**
+For Sing, I think it does a good job listing the words singing, theater, and hosting but I'm surprised that animal is not on the top of the list because I think that would makes it distinctive. can I change legally blonde to kill bill actually
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Show top TF-IDF terms for Kill Bill
+I typed your Sing answer in word for word. The slot now reads:
+
+> ### Your movies: what do the top terms get right and wrong about what makes each one distinctive?
+>
+> For Sing, I think it does a good job listing the words singing, theater, and hosting but I'm surprised that animal is not on the top of the list because I think that would makes it distinctive.
+
+Yes, you can swap Legally Blonde for Kill Bill. Here's what it printed:
+
+```
+2 movies match "kill bill". Run it again with the whole title of one:
+  Kill Bill: Vol. 1 (2003)
+  Kill Bill: Vol. 2 (2004)
+```
+
+Which one did you mean, Vol. 1 or Vol. 2?
+
+**User:**
+vol 1
+
+**Claude:**
+- 🔧 `Bash`: Show top TF-IDF terms for Kill Bill: Vol. 1
+Here's the output for Kill Bill: Vol. 1:
+
+```
+Kill Bill: Vol. 1 (2003): the 10 words with the highest TF-IDF weight in its plot summary.
+Only 10 of this summary's words are in the vocabulary with your settings.
+
+     word               weight  count here  movies
+  1. employer            0.379           1       8
+  2. circle              0.373           1       9
+  3. assassination       0.334           1      20
+  4. vengeance           0.327           1      23
+  5. assassin            0.319           1      27
+  6. shot                0.313           1      30
+  7. members             0.304           1      36
+  8. ruthless            0.295           1      43
+  9. plot                0.274           1      64
+ 10. lives               0.213           1     205
+
+count here: how many times the word is in this plot summary. movies: how many of the 4,309 plot summaries have it.
+
+The plot summary: An assassin is shot by her ruthless employer, Bill, and other members of their assassination circle – but she lives to plot her vengeance.
+
+Your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+```
+
+Your Sing answer is already in the slot. What do the top terms get right, and what do they get wrong, about what makes Kill Bill: Vol. 1 distinctive? A sentence or two is enough.
+
+**User:**
+It gets right with the general plot of the movie but I expected to see Bill there too, and that's what would've made it extinctive.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I typed your Kill Bill answer in word for word, right after your Sing answer. The slot now reads:
+
+> ### Your movies: what do the top terms get right and wrong about what makes each one distinctive?
+>
+> For Sing, I think it does a good job listing the words singing, theater, and hosting but I'm surprised that animal is not on the top of the list because I think that would makes it distinctive. It gets right with the general plot of the movie but I expected to see Bill there too, and that's what would've made it extinctive.
+
+Two small edits might help a reader. Your second sentence doesn't say which movie it's about. Also, "extinctive" may be a typo for "distinctive". Here's a tidied version:
+
+> ...because I think that would makes it distinctive. For Kill Bill: Vol. 1, it gets right with the general plot of the movie but I expected to see Bill there too, and that's what would've made it distinctive.
+
+Should I use this version, or keep it as you wrote it?
+
+**User:**
+yes use that version
 
 <!-- end-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb -->
