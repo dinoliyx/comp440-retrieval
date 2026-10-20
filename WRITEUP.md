@@ -10,11 +10,11 @@ Part 0 predictions stay as you first wrote them; Part 5 asks what you would chan
 
 ### Questions that name a character, place or thing: which method will do better, and why?
 
-XXXX
+TF-IDF should do better for these questions because normally the names of character or place are unique so I would think keyword search can easily spot the words since it weigh this kind of uniqueness for words.
 
 ### Vague descriptions: which method will do better, and why?
 
-XXXX
+Embedding search because it compares the question with overviews and ranks them. I think in this way it understand the context better than TF-IDF
 
 ## Part 1: Build the TF-IDF model
 
