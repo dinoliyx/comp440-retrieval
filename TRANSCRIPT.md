@@ -528,5 +528,37 @@ save everything I will come back
 
 **Claude:**
 - 🔧 `Skill`: save
+- 🔧 `Bash`: Commit work in progress and push to GitHub
+Your work is saved on GitHub:
+
+```
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main a03a218] Save work in progress
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+To https://github.com/dinoliyx/comp440-retrieval.git
+   8accd0b..a03a218  main -> main
+```
+
+You stopped in Part 3, at the last question: what TF-IDF got right and wrong in your three searches.
+The rest is due 8:00am Thursday, October 22. Submit the form once, when you finish.
+To pick up again, open a terminal in this folder and run `claude`. It will find where you left off.
 
 <!-- end-session: 9c09130d-9be8-4c5d-9e9f-69f325dac0eb -->
+
+<!-- transcript-session: 31af4add-1cbe-4cff-aa68-7c609b68aa4b | 2026-10-21T19:25:24.329Z -->
+## Session `31af4add`, 2026-10-21 19:25:24
+
+*1 user turns. Tool outputs and reasoning omitted.*
+
+**User:**
+*(ran `/setup`)*
+
+**Claude:**
+- 🔧 `Bash`: Show commit subjects, remotes and uv version
+Setup is already finished (`Part 0 done` exists), so I'll only check that the packages and model are installed.
+- 🔧 `Bash`: Install packages and check the embedding model
+- 🔧 `Bash`: Check for template updates
+- 🔧 `Read`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+
+<!-- end-session: 31af4add-1cbe-4cff-aa68-7c609b68aa4b -->
