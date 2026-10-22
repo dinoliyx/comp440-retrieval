@@ -56,16 +56,16 @@ I've notice a pattern that TF-IDF can capture a lot of the keywords but fail to 
 
 ### What is a sentence embedding, in your own words?
 
-XXXX
+a sentence embedding converts words into a list of number so the system can match realated concepts even if they don't share the exact word. For example, a movie summary like "a group of animal hosting singing competition in a big theater." can be converted to numbers that match with the matrix of Sing
 
 ### Where does each method do better, and why?
 
-XXXX
+TF-IDF does better job on matching exact keywords like specific names or places. Whereas embedding does a better job on capturing the broader conceptual informaiton even when the words don't match.
 
 ### Your Part 0 predictions: which held, and which would you change?
 
-XXXX
+I think my prediction was pretty accurate. I will specify what it means for embedding search doing a better job on understand the context. It's that embedding search can compaure meaning across text even there's zero words match.
 
 ### How might you combine the two methods?
 
-XXXX
+TF-IDF for exact words like names or places search and embedding search for general concceptual meaning
