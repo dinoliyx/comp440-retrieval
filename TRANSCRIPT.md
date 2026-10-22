@@ -595,7 +595,7 @@ Which kind of question did TF-IDF handle best, and which worst? By how much? A s
 <!-- transcript-session: 1de7951d-f383-41c1-96c6-887cf882a484 | 2026-10-22T01:01:11.391Z -->
 ## Session `1de7951d`, 2026-10-22 01:01:11
 
-*12 user turns. Tool outputs and reasoning omitted.*
+*13 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 continue on what I have left
@@ -931,5 +931,43 @@ TF-IDF for exact words like names or places search and embedding search for gene
 - 🔧 `Bash`: Save transcript, commit Part 5, push, check upstream
 - 🔧 `Skill`: checkpoint
 - 🔧 `Bash`: Check that every command runs and every slot is filled
+- 🔧 `Bash`: Refresh transcript, check status, push, get repo URL
+I wrote your answer in. The slot now reads:
+
+> TF-IDF for exact words like names or places search and embedding search for general concceptual meaning
+
+Part 5 is saved on GitHub.
+
+Here is the final check:
+
+```
+== The commands ==
+  search.py (a tiny TF-IDF search): ran, 0.7 s
+  top_terms.py (one movie): ran, 0.4 s
+
+== What is missing ==
+  Nothing.
+
+== Saved on GitHub ==
+  Everything is committed and pushed.
+
+0 things missing.
+Your work is pushed, so complete the Work Submission Form, https://forms.gle/mgKcnqzTGxNaGvteA, choose "Activity submission", and in its box write "Representing and Retrieving Knowledge" and your repository's GitHub URL.
+```
+
+```
+3 session(s) found; this session in TRANSCRIPT.md: yes.
+```
+
+That refresh also made an `Update TRANSCRIPT.md` commit, which is now pushed.
+
+To submit, complete the [Work Submission Form](https://forms.gle/mgKcnqzTGxNaGvteA) and choose "Activity submission". In its box, write "Representing and Retrieving Knowledge" and your repository's GitHub URL:
+
+https://github.com/dinoliyx/comp440-retrieval
+
+**Have you submitted the form?**
+
+**User:**
+yes, I submitted it
 
 <!-- end-session: 1de7951d-f383-41c1-96c6-887cf882a484 -->
