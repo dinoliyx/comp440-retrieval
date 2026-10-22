@@ -926,4 +926,10 @@ Last question: **How might you combine the two methods?** A sentence or two is e
 **User:**
 TF-IDF for exact words like names or places search and embedding search for general concceptual meaning
 
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Save transcript, commit Part 5, push, check upstream
+- 🔧 `Skill`: checkpoint
+- 🔧 `Bash`: Check that every command runs and every slot is filled
+
 <!-- end-session: 1de7951d-f383-41c1-96c6-887cf882a484 -->
