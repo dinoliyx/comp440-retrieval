@@ -595,7 +595,7 @@ Which kind of question did TF-IDF handle best, and which worst? By how much? A s
 <!-- transcript-session: 1de7951d-f383-41c1-96c6-887cf882a484 | 2026-10-22T01:01:11.391Z -->
 ## Session `1de7951d`, 2026-10-22 01:01:11
 
-*4 user turns. Tool outputs and reasoning omitted.*
+*12 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 continue on what I have left
@@ -682,5 +682,248 @@ What do you notice about this one? Look at a couple more misses too, then tell m
 
 **User:**
 I've notice a pattern that TF-IDF can capture a lot of the keywords but fail to understand the context in which the key words are used, and result in misleading answers.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Save transcript, commit Part 4, push, check upstream
+- 🔧 `Bash`: Check the embedding model is downloaded
+- 🔧 `Bash`: Run the question bank with embeddings
+I wrote it in. The slot now reads:
+
+> I've notice a pattern that TF-IDF can capture a lot of the keywords but fail to understand the context in which the key words are used, and result in misleading answers.
+
+One caveat: w026 is one question, so check that the other misses fit the same pattern. Some may fail for another reason, like a summary that is too short to share any words with the question.
+
+Part 4 is saved on GitHub.
+
+**Part 5: Embeddings** (about 12 minutes). The model is ready:
+
+```
+The embedding model is ready: it matches the shipped vectors for 5 test movies.
+```
+
+The question bank is now running with embeddings. It takes a minute or so.
+
+While it runs, here is what a sentence embedding is. On October 1 you saw GloVe, which gives each word a list of numbers. Words used in similar contexts get similar lists. A sentence model does the same for a whole sentence or plot summary. It reads all the words together and outputs one list of 384 numbers. Two texts about similar things get similar lists, even when they share no words. Search then ranks movies by cosine similarity between your question's list and each summary's list.
+
+Ask me anything you'd like about it. When you're ready: **What is a sentence embedding, in your own words? Use one of your own Part 3 questions or movies as the example.** A sentence or two is enough.
+
+**User:**
+<task-notification>
+<task-id>b7hq3xzh7</task-id>
+<tool-use-id>toolu_01JmYN3mHjnwH83N8o3L2SLr</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-dinoli-Desktop-COMP440-Class-activities-comp440-retrieval/1de7951d-f383-41c1-96c6-887cf882a484/tasks/b7hq3xzh7.output</output-file>
+<status>completed</status>
+<summary>Background command "Run the question bank with embeddings" completed (exit code 0)</summary>
+</task-notification>
+
+**Claude:**
+- 🔧 `Read`: /private/tmp/claude-501/-Users-dinoli-Desktop-COMP440-Class-activities-comp440-retrieval/1de7951d...
+The embedding run finished:
+
+```
+Saved every question's top 10 in results/embed.json. To look through them: uv run python site.py
+```
+
+I'll show its scores once your sentence-embedding slot is written. **What is a sentence embedding, in your own words? Use one of your own Part 3 questions or movies as the example.** A sentence or two is enough.
+
+**User:**
+a sentence embedding converts words into a list of number so the system can match realated concepts even if they don't share the exact word. For example, a movie summary like "a group of animal hosting singing competition in a big theater." can be converted to numbers that match with the matrix of Sing
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I wrote it in. The slot now reads:
+
+> a sentence embedding converts words into a list of number so the system can match realated concepts even if they don't share the exact word. For example, a movie summary like "a group of animal hosting singing competition in a big theater." can be converted to numbers that match with the matrix of Sing
+
+Here is the embedding run's output in full:
+
+```
+Embedding 518 questions. This can take a minute.
+Ran 518 questions against 4,309 movies in 8 seconds.
+
+Embeddings put the right movie first for 31 of 100 written questions and in the top 10 for 59.
+  Of the 34 detail questions, they put 24 first and 31 in the top 10.
+  Of the 33 reworded questions, they put 4 first and 18 in the top 10.
+  Of the 33 vague questions, they put 3 first and 10 in the top 10.
+They put the right movie first for 32 of 418 real requests and in the top 10 for 81.
+
+The embedding model reads only about the first 200 words of a question, so it ignored the end of 62 of the 418 real requests.
+
+Saved every question's top 10 in results/embed.json. To look through them: uv run python site.py
+```
+
+Reload http://localhost:8765. It now shows both methods. The Show menu has three new choices: "TF-IDF did better", "Embeddings did better" and "Both missed", each with its count.
+
+If you'd like, I can also rerun your Part 3 questions with both methods.
+
+**Look at one question from "TF-IDF did better" and one from "Embeddings did better", any you like, and tell me when you have.**
+
+**User:**
+show me
+
+**Claude:**
+- 🔧 `Bash`: Pull each question's id, kind and rank from both results files
+- 🔧 `Bash`: List questions where one method ranked the right movie higher
+- 🔧 `Bash`: List reworded and vague questions where embeddings ranked higher
+I pulled each question's rank for both methods out of the two results files. Below is a list for each side; pick one from each. "null" means the right movie wasn't in that method's top 100. These counts are mine, so they may differ a little from the site's.
+
+**TF-IDF ranked the right movie higher:**
+```
+TFIDF w002 detail tfidf=3 embed=5
+TFIDF w007 detail tfidf=1 embed=2
+TFIDF w010 detail tfidf=2 embed=15
+TFIDF w013 detail tfidf=1 embed=2
+TFIDF w030 detail tfidf=1 embed=94
+TFIDF w048 reworded tfidf=7 embed=null
+TFIDF tot-train-792 real tfidf=4 embed=null
+TFIDF tot-train-322 real tfidf=7 embed=null
+TFIDF tot-train-975 real tfidf=1 embed=16
+TFIDF tot-train-751 real tfidf=6 embed=null
+```
+
+**Embeddings ranked the right movie higher:**
+```
+EMBED w001 detail tfidf=null embed=1
+EMBED w003 detail tfidf=2 embed=1
+EMBED w009 detail tfidf=3 embed=1
+EMBED w017 detail tfidf=5 embed=1
+EMBED w035 reworded tfidf=null embed=1
+EMBED w036 reworded tfidf=null embed=6
+EMBED w040 reworded tfidf=null embed=1
+EMBED w042 reworded tfidf=null embed=1
+EMBED w044 reworded tfidf=null embed=2
+EMBED w045 reworded tfidf=null embed=4
+```
+
+**Which two ids do you want to see?**
+
+**User:**
+w016
+
+**Claude:**
+- 🔧 `Bash`: Show saved results for question w016
+```
+w016: Written question that names a character, place or thing
+  Luke finds Princess Leia's secret message inside R2-D2 and leaves Tatooine with Obi-Wan.
+
+The right movie: Star Wars: Episode IV - A New Hope (1977)
+TF-IDF ranked it 2nd. Embeddings ranked it 1st.
+Its plot summary: Princess Leia is captured and held hostage by the evil Imperial forces in
+their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain
+Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful
+princess and restore peace and justice in the Empire.
+The question's words in its plot summary: princess, luke.
+
+TF-IDF, top 10:
+   1. 0.270  Thirteenth Floor, The (1999)   matched: message, leaves, secret
+   2. 0.223  Star Wars: Episode IV - A New Hope (1977)   [the right movie]   matched: princess, luke
+   3. 0.218  Star Wars: Episode V - The Empire Strikes Back (1980)   matched: luke, princess
+   4. 0.209  Decoys (2004)   matched: luke
+   5. 0.181  Hunchback of Notre Dame, The (1996)   matched: secret, leaves, finds
+   6. 0.175  Witches, The (1990)   matched: luke
+   7. 0.157  The Matrix Resurrections (2021)   matched: inside, finds
+   8. 0.154  Spectre (2015)   matched: message, secret
+   9. 0.147  Jumpin' Jack Flash (1986)   matched: message
+  10. 0.142  Star Wars: The Last Jedi (2017)   matched: luke
+
+Embeddings, top 10:
+   1. 0.632  Star Wars: Episode IV - A New Hope (1977)   [the right movie]
+   2. 0.545  Star Wars: Episode I - The Phantom Menace (1999)
+   3. 0.519  Star Wars: Episode V - The Empire Strikes Back (1980)
+   4. 0.495  Star Wars: Episode II - Attack of the Clones (2002)
+   5. 0.468  Star Wars: The Last Jedi (2017)
+   6. 0.435  Decoys (2004)
+   7. 0.416  Star Wars: Episode VI - Return of the Jedi (1983)
+   8. 0.376  Star Wars: The Clone Wars (2008)
+   9. 0.356  Star Wars: The Rise of Skywalker (2019)
+  10. 0.348  Star Wars: The Clone Wars (2008)
+```
+
+Correction: line 10 of the embeddings list should read `Star Wars: Episode III - Revenge of the Sith (2005)`. The command printed that, and I miscopied it.
+
+Embeddings has no "matched" column, because it doesn't compare words one by one. Its scores are cosine similarity between the two lists of numbers.
+
+That one is from the "Embeddings did better" side. **Which question from the "TF-IDF did better" side do you want to see?**
+
+**User:**
+w010
+
+**Claude:**
+- 🔧 `Bash`: Show saved results for question w010
+```
+w010: Written question that names a character, place or thing
+  Jack gets on board thanks to a lucky poker hand and falls for Rose, who is engaged to Cal.
+
+The right movie: Titanic (1997)
+TF-IDF ranked it 2nd. Embeddings ranked it 15th.
+Its plot summary: 101-year-old Rose DeWitt Bukater tells the story of her life aboard the
+Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile,
+Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole
+story from Titanic's departure through to its death—on its first and last voyage—on April 15,
+1912.
+The question's words in its plot summary: rose, jack.
+
+TF-IDF, top 10:
+   1. 0.195  Everyone Says I Love You (1996)   matched: engaged, gets
+   2. 0.185  Titanic (1997)   [the right movie]   matched: rose, jack
+   3. 0.162  Age of Innocence, The (1993)   matched: engaged, falls
+   4. 0.162  Arabian Adventure (1979)   matched: hand, rose
+   5. 0.138  Shadowboxer (2005)   matched: rose
+   6. 0.131  Brokeback Mountain (2005)   matched: jack, hand
+   7. 0.122  Rounders (1998)   matched: poker
+   8. 0.122  Final Destination 3 (2006)   matched: lucky
+   9. 0.120  Silent Hill (2006)   matched: rose
+  10. 0.119  The Zero Theorem (2013)   matched: thanks
+
+Embeddings, top 10:
+   1. 0.493  Family Man, The (2000)
+   2. 0.485  War of the Roses, The (1989)
+   3. 0.484  Mr. Mom (1983)
+   4. 0.472  Honeymoon in Vegas (1992)
+   5. 0.458  Croupier (1998)
+   6. 0.443  Mirror Has Two Faces, The (1996)
+   7. 0.442  Firewall (2006)
+   8. 0.436  Husbands and Wives (1992)
+   9. 0.417  Maverick (1994)
+  10. 0.411  Shadowboxer (2005)
+```
+
+Now you've looked at one from each side. **Where does each method do better, and why?** A sentence or two is enough.
+
+**User:**
+TF-IDF does better job on matching exact keywords like specific names or places. Whereas embedding does a better job on capturing the broader conceptual informaiton even when the words don't match.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I wrote it in. The slot now reads:
+
+> TF-IDF does better job on matching exact keywords like specific names or places. Whereas embedding does a better job on capturing the broader conceptual informaiton even when the words don't match.
+
+One caveat: both examples you looked at were detail questions that name characters. The score lines for detail questions show 15 first for TF-IDF and 24 first for embeddings, so two examples may not show the whole pattern.
+
+Here are your Part 0 predictions, as you wrote them:
+
+> **Questions that name a character, place or thing:** TF-IDF should do better for these questions because normally the names of character or place are unique so I would think keyword search can easily spot the words since it weigh this kind of uniqueness for words.
+
+> **Vague descriptions:** Embedding search because it compares the question with overviews and ranks them. I think in this way it understand the context better than TF-IDF
+
+**Which held, and which would you now change, and why?** A sentence or two is enough.
+
+**User:**
+I think my prediction was pretty accurate. I will specify what it means for embedding search doing a better job on understand the context. It's that embedding search can compaure meaning across text even there's zero words match.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+I wrote it in. The slot now reads:
+
+> I think my prediction was pretty accurate. I will specify what it means for embedding search doing a better job on understand the context. It's that embedding search can compaure meaning across text even there's zero words match.
+
+One caveat: your first prediction said TF-IDF would do better on detail questions. But on the detail row, embeddings put 24 first and 31 in the top 10, against TF-IDF's 15 and 29.
+
+Last question: **How might you combine the two methods?** A sentence or two is enough.
+
+**User:**
+TF-IDF for exact words like names or places search and embedding search for general concceptual meaning
 
 <!-- end-session: 1de7951d-f383-41c1-96c6-887cf882a484 -->
