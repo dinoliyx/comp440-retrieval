@@ -46,11 +46,11 @@ NO it doesn't appear
 
 ### Which kind of question did TF-IDF handle best, and which worst? By how much?
 
-XXXX
+TF-IDF perdorms best on detail questions that it ranks first in 15 out of 34 cases and top-10 in 29 cases; it performs the worst on vague questions that it ranks in neither the top choicce nor the rop 10 for any of the 33 cases.
 
 ### The misses you looked at: what do they have in common?
 
-XXXX
+I've notice a pattern that TF-IDF can capture a lot of the keywords but fail to understand the context in which the key words are used, and result in misleading answers.
 
 ## Part 5: Embeddings
 
