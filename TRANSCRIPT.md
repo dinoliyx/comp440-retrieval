@@ -560,5 +560,127 @@ Setup is already finished (`Part 0 done` exists), so I'll only check that the pa
 - 🔧 `Bash`: Install packages and check the embedding model
 - 🔧 `Bash`: Check for template updates
 - 🔧 `Read`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Save transcript, commit Part 3 and push
+- 🔧 `Bash`: Commit Part 3 marker and push
+- 🔧 `Bash`: Run the question bank with TF-IDF
+Setup checks are done. The packages and the embedding model are installed:
+
+```
+Resolved 42 packages in 16ms
+Checked 38 packages in 7ms
+The embedding model is ready: it matches the shipped vectors for 5 test movies.
+```
+
+Your Part 3 slots were already filled, so I committed `Part 3 done` and pushed it. Part 3 is saved on GitHub. `dump_transcript.py` made the `Update TRANSCRIPT.md` commit by itself.
+
+**Part 4: The question bank (about 9 minutes).** This run sends all 518 questions through TF-IDF with your settings:
+
+```
+TF-IDF, with your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+Ran 518 questions against 4,309 movies in under a second.
+
+TF-IDF put the right movie first for 15 of 100 written questions and in the top 10 for 30.
+  Of the 34 detail questions, it put 15 first and 29 in the top 10.
+  Of the 33 reworded questions, it put 0 first and 1 in the top 10.
+  Of the 33 vague questions, it put 0 first and 0 in the top 10.
+It put the right movie first for 18 of 418 real requests and in the top 10 for 64.
+
+Saved every question's top 10 in results/tfidf.json. To look through them: uv run python site.py
+```
+
+Which kind of question did TF-IDF handle best, and which worst? By how much? A sentence or two is enough.
 
 <!-- end-session: 31af4add-1cbe-4cff-aa68-7c609b68aa4b -->
+
+<!-- transcript-session: 1de7951d-f383-41c1-96c6-887cf882a484 | 2026-10-22T01:01:11.391Z -->
+## Session `1de7951d`, 2026-10-22 01:01:11
+
+*4 user turns. Tool outputs and reasoning omitted.*
+
+**User:**
+continue on what I have left
+
+**Claude:**
+- 🔧 `Bash`: Show history, remotes, and upstream changes
+- 🔧 `Read`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+You're at Part 4, The question bank (about 9 minutes). No new template updates upstream.
+- 🔧 `Bash`: Run the question bank with TF-IDF
+```
+TF-IDF, with your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+Ran 518 questions against 4,309 movies in under a second.
+
+TF-IDF put the right movie first for 15 of 100 written questions and in the top 10 for 30.
+  Of the 34 detail questions, it put 15 first and 29 in the top 10.
+  Of the 33 reworded questions, it put 0 first and 1 in the top 10.
+  Of the 33 vague questions, it put 0 first and 0 in the top 10.
+It put the right movie first for 18 of 418 real requests and in the top 10 for 64.
+
+Saved every question's top 10 in results/tfidf.json. To look through them: uv run python site.py
+```
+
+"First" means the right movie ranked #1. "Top 10" means it was anywhere in the first ten results.
+
+The written questions come in three kinds. Detail questions name a character, place or thing. Reworded questions retell the plot in other words. Vague questions describe the movie the way you would to a friend.
+
+**Which kind of question did TF-IDF handle best, and which worst? By how much?** A sentence or two is enough.
+
+**User:**
+TF-IDF perdorms best on detail questions that it ranks first in 15 out of 34 cases and top-10 in 29 cases; it performs the worst on vague questions that it ranks in neither the top choicce nor the rop 10 for any of the 33 cases.
+
+**Claude:**
+- 🔧 `Edit`: /Users/dinoli/Desktop/COMP440/Class activities/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Start the comparison site
+- 🔧 `Bash`: Show site output and README Part 4 text
+- 🔧 `Bash`: Read the rest of README Part 4
+I wrote it in. The slot now reads:
+
+> TF-IDF perdorms best on detail questions that it ranks first in 15 out of 34 cases and top-10 in 29 cases; it performs the worst on vague questions that it ranks in neither the top choicce nor the rop 10 for any of the 33 cases.
+
+One caveat: each kind has only about 33 questions, so a gap of a few questions is a few percentage points and could come from a handful of lucky or unlucky wordings.
+
+The site is running:
+
+```
+The site is running at http://localhost:8765. Stop it with Ctrl-C.
+```
+
+It shows one question at a time. You'll see the right movie, where TF-IDF ranked it, and TF-IDF's top 10, with the words each result shares with the question. Pick "TF-IDF missed" in the Show menu to see only the questions where the right movie isn't in the top 10. If no page opened, go to http://localhost:8765.
+
+Look through some answers, especially the misses. You can tell me a question's id, like w026, to talk about it. **Tell me when you've looked at a few.**
+
+**User:**
+w026
+
+**Claude:**
+- 🔧 `Bash`: Show saved TF-IDF results for question w026
+```
+w026: Written question that names a character, place or thing
+  The poor Kim family tricks their way into jobs working for the rich Park family.
+
+The right movie: Parasite (2019)
+TF-IDF didn't rank it in the top 100.
+Its plot summary: All unemployed, Ki-taek's family takes peculiar interest in the wealthy and
+glamorous Parks for their livelihood until they get entangled in an unexpected incident.
+The question's words in its plot summary: family.
+
+TF-IDF, top 10:
+   1. 0.198  Free Willy (1993)   matched: park, tricks, family
+   2. 0.183  Snakes on a Plane (2006)   matched: kim
+   3. 0.174  Metropolis (1927)   matched: poor, rich
+   4. 0.161  National Lampoon's Vacation (1983)   matched: park, family
+   5. 0.140  In Time (2011)   matched: poor, rich, way
+   6. 0.134  Daddy Day Care (2003)   matched: jobs
+   7. 0.127  Jurassic World (2015)   matched: park
+   8. 0.126  Scent of a Woman (1992)   matched: poor, family
+   9. 0.125  Look Who's Talking (1989)   matched: tricks, working
+  10. 0.124  Crazy/Beautiful (2001)   matched: poor
+```
+
+The number after each rank is the cosine similarity between the question's TF-IDF vector and that movie's. Higher means more shared weight. "matched" lists the question's words that appear in that movie's summary.
+
+What do you notice about this one? Look at a couple more misses too, then tell me when you're ready for the question.
+
+**User:**
+I've notice a pattern that TF-IDF can capture a lot of the keywords but fail to understand the context in which the key words are used, and result in misleading answers.
+
+<!-- end-session: 1de7951d-f383-41c1-96c6-887cf882a484 -->
